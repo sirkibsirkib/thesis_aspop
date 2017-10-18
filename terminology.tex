@@ -1,0 +1,38 @@
+\chapter{Terminology \& Definitions}
+
+\section{Strings and Blocks}
+
+Genomic sequences of nucleotides are represented as strings of symbols in-silico; Each symbol is an element of an \textit{alphabet} set $\sigma{}$. A string $X$ of length $n$ (i.e. $|X|=n$) is a concatenated sequence of symbols $X[1,n] = X_1X_2...X_n$ where $X_i$ refers to the symbol in string $X$ at index position $i$\footnote{We adhere to 1-indexed sequences for the purposes of the conceptual parts of this work.}. A substring of $X$ is any sequence $X[i,j]$ where $i \geq 1$ and $j \leq n$. A prefix of $X$ is a substring $X[1,j]$ and a suffix of $X$ is a substring $X[i,n]$. A string $X[i,j]$ with $i > j$ has no symbols, and is written as the empty sequence $\epsilon$. For our purposes, we consider both $\epsilon$ and $X$ valid prefixes and suffixes of a string $X$.
+ 
+If a string $X$ is partitioned into a sequence $P$ of substrings, these substrings are called \glspl{block} of $X$ (also called `factors' of $X$). Note that concatenations of adjacent blocks of $X$ again yield substrings of $X$.
+
+In the sections to come, it is necessary to clearly distinguish between the granularities of symbol sequences and \glspl{block sequence}. For instance, the suffixes of a string are not necessarily the same as the strings represented by the \gls{suffix block sequence} of that same string; Consider a string of length 4 partitioned into 2 blocks of length 2. The original string has suffixes of length 0, 1, 2, 3, and 4, whereas the strings that arise from suffixes of the block sequence have lengths 0, 2 and 4.
+
+\section{Matching and Errors}
+
+Two arbitrary strings have an \gls{exact match} or are \textit{equivalent} if they are comprised of the same symbols in the same order. Strings $A$ and $B$ have \textit{matching substrings} if some substring of the one exactly matches some substring of the other i.e. $A[c,d] = B[e,f]$ for some positive integers $c,d,e,f$. An \gls{approximate match} gives a similar definition with a bounded degree of relaxation by introducing an \gls{error} limit parameter \bfit{K} to `qualify' the approximate match. Two arbitrary strings are said to $K$-match (approximate match within $K$ errors or \gls{K-approximate}) if there exists a match between the strings with no more than $K$ errors; If strings $A$ and $B$ $K$-match but do not $(K+1)$-match, these strings are said to have an \gls{error distance} of $K$. An error is some  \textit{discrepancy} between a pair of corresponding symbols in the two strings at a particular index; A more precise definition depends on the metric being used. In this work, we only consider \gls{Hamming distance} and \gls{edit distance} (aka Levenshtein distance); The term `\gls{error distance}' generalizes over both these specific measures.
+
+\textit{Edit distance} is a numeric measure defined for two strings. It is the minimal number of symbol \glspl{insertion}, \glspl{deletion} or \glspl{substitution} required to transform the one string into the other. The process of transforming a string $X$ using $K$ or fewer such single-symbol-error operations yields some \gls{derived string} $X'$, where $X$ and $X'$ are both \textit{$K$-derivable} from each other. For example, the strings `flat' and `float' have an edit distance of 1, as a derivation in either direction requires 1 symbol transformation operation.
+ 
+\textit{Hamming distance} is a specialization of edit distance, where only symbol substitution operations are permitted. As substitutions do not influence the length of the string, all derivable strings of $X$ have length $|X|$. For this reason, Hamming distance is only defined for two strings with the same length. As an example, `cat' and `car' have a hamming distance of 1,  but `cat' and `cats' have no defined Hamming distance.
+
+In addition to error distance, \gls{error rate} describes the distance between two different strings normalized according to the lengths of the strings. How to define the string length between strings of different lengths varies depending on the source material. For our purposes, error rate is defined in terms of the maximum length of the two strings. For example, the error rate between `coat' and `cost' is $1/4$, as there is $1$ error, and the length of the overlap is $max(4, 4) = 4$.
+
+\section{Filter Algorithms}
+
+A \gls{filter algorithm} (or filtering algorithm) is a subclass of exact algorithms. Being aptly named, they work by `filtering' out large swathes of the search space before searching the filtered space in the more conventional sense. As such these algorithms work in two distinct steps:
+\begin{enumerate}
+\item \Gls{search step}
+
+The task of step 1 is to produce a \gls{candidate} set, a superset of the actual \gls{solution} set. Candidates are selected from elements\footnote{Conceptually, a candidate is nothing more than an element in the search space; However, from an implementation perspective, they can also be data structures that encode extra information necessary for the verification step.} in the search space (`generated') when they are found to satisfy a predefined predicate known as the \gls{filter criterion}.
+
+\item \Gls{verification step}
+
+Step 2 creates a final solution set from the candidate set, comprised only of candidates that (upon examination) are found to satisfy the \gls{solution criterion}; This predicate is simply defined as being true for a candidate $c$ if and only if $c$ is a true solution to the problem.
+
+\end{enumerate}
+ 
+\noindent
+Filter algorithms are generally more complicated than naive algorithms for the same problems, but they make up for it in speed. A filter algorithm is only useful if determining the candidate set is significantly cheaper than determining the solution set, and the filter criterion is not too generous (generating too many \textit{spurious} candidates). Usually filter algorithms have terrible worst-case time complexities, being subject to circumstances that degenerate them to naive algorithms or worse. Relying on some practical knowledge of the problem, this doesn't occur in most cases.
+ 
+Filter algorithms are different from heuristics in that they are still guaranteed to provide exact solutions at the end; The filter criterion is required never to give a \textit{false negative}, as it would cause a verifiable solution to be overlooked in the verification step.

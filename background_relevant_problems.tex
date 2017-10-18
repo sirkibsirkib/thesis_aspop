@@ -1,0 +1,32 @@
+\section{Relevant Problems}
+\label{relevant}
+
+Understanding the nature and solutions to simpler problems than \aspop{} serve to incrementally approach our implemented algorithm in its final state. The explanations in this section refer to these problems. For the sake of specificity, the set of these problems is laid out in Table \ref{tab:related} with their definitions; For the sake of brevity, they are assigned short monikers that are used to refer to them in Sections \ref{solving_P1} - \ref{P3_suff}.
+
+
+
+\begin{table}[H]
+\centering
+\caption{Problems discussed in the text, given short monikers and their relations to one another described.\strut}
+\begin{tabularx}{\textwidth}{|s|s|b|m|}
+\hline
+
+Moniker & Name  & Description & Relevance \\
+\hline
+\hline
+
+
+P1 & Pair Within Distance  & Return whether two given strings, $\bfit{A}$ and $\bfit{B}$, are within a given $\bfit{K}$ error distance of each other. & The simplest problem.  \\
+\hline
+
+P2 & Approx. String Match & Given a whole number $\bfit{K}$, a \textit{\gls{text}} string and a \textit{\gls{pattern}} string, return all substrings of the pattern that are within ~$\bfit{K}$ error distance of the pattern. & Return all substrings of the pattern that return \textit{true} when used as P1 instances.\\
+\hline
+
+P3 & Approx. Prefix Match & Return the indices within a given \bfit{text} string of matches $B$ of all strings $A$, where $A$ is any prefix longer than a given whole number $\bfit{t}$ of a given $\bfit{pattern}$ string, and the error rate of the match from $A$ to $B$ is no larger than a given~$\bfit{e}$. & An instance of P2 for every prefix with length at least~t of the pattern.  \\
+\hline
+
+\aspop{} & Approx. Suffix-Prefix Overlap & Return all approximate overlaps at least given integer \bfit{t} long between the prefix of $A$ and the suffix of $B$, where $A$ and $B$ are any strings in the given set $\bfit{S}$; The overlap must have an error rate no larger than a given $\bfit{e}$. & An instance of P3 for each string in $S$ as the pattern. Additionally, solutions are restricted to occurring as suffixes of $S$ strings.  \\ \hline
+\end{tabularx}
+\label{tab:related}
+\end{table}
+% \end{table}

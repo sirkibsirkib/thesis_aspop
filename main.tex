@@ -1,0 +1,172 @@
+\documentclass[12pt]{ociamthesis}  % default square logo 
+%\documentclass[12pt,beltcrest]{ociamthesis} % use old belt crest logo
+%\documentclass[12pt,shieldcrest]{ociamthesis} % use older shield crest logo
+\usepackage{amsthm}
+\usepackage{amsmath}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{corollary}{Corollary}[theorem]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{fscheme}{Filtering Scheme}
+\newtheorem{pscheme}{Partitioning Scheme}
+
+%load any additional packages
+
+\usepackage{tabularx,ragged2e,booktabs}
+\newcolumntype{L}{>{\RaggedRight\arraybackslash}X} % ragged-right version of "X"
+
+\usepackage[colorlinks=true,linkcolor=black,urlcolor=black,citecolor=black,bookmarksopen=true]{hyperref}
+\setlength{\skip\footins}{1cm}
+\usepackage{bookmark}
+\usepackage{mathtools}
+\DeclarePairedDelimiter{\ceil}{\lceil}{\rceil}
+% \DeclarePairedDelimiter\floor{\lfloor}{\rfloor}
+% \usepackage{minted}
+\usepackage[section]{minted}
+\newmintedfile[myPython]{python}{
+bgcolor=white,
+fontfamily=tt,
+linenos=true,
+numberblanklines=true,
+numbersep=5pt,
+gobble=0,
+frame=leftline,
+framerule=0.4pt,
+framesep=2mm,
+funcnamehighlighting=true,
+tabsize=4,
+obeytabs=false,
+mathescape=false
+samepage=false, %with this setting you can force the list to appear on the same page
+showspaces=false,
+showtabs =false,
+texcl=false,
+fontsize=\footnotesize
+}
+
+\usepackage{subcaption}
+\usepackage{placeins}
+\usepackage{rotating}
+\usepackage{enumitem}
+\usepackage{lscape}
+\newcolumntype{b}{>{\hsize=15\hsize}X}
+\newcolumntype{m}{>{\hsize=9.65\hsize}X}
+\newcolumntype{s}{>{\hsize=4\hsize}X}
+\usepackage{caption}
+\captionsetup{width=0.83\textwidth}
+\usepackage{hyperref}
+\usepackage{csvsimple,booktabs}
+\usepackage{csvsimple}
+\usepackage{float}
+\usepackage[toc,section=chapter]{glossaries}
+\usepackage{titlesec}
+\usepackage{todonotes}
+\usepackage{tikz}
+\usepackage{verbatim}
+\usetikzlibrary{arrows}
+% \titleformat{\chapter}{\Large\bfseries}{\thechapter.}{20pt}{\huge}
+\titleformat{\chapter}{\vspace{-2cm}\Large\bfseries}{\thechapter.}{20pt}{\huge}
+
+
+\hyphenation{Minimap}
+
+
+% \titleformat{\chapter}
+%   {\Large\bfseries} % format
+%   {}                % label
+%   {0pt}             % sep
+%   {\huge}           % before-code
+
+\usepackage{amssymb}
+\usepackage{acro}
+\usepackage{glossaries}
+\renewcommand{\glstextformat}[1]{\textbf{#1}}
+\input{gloss}
+
+\input{abbr}
+\acsetup{first-style=short}
+% \renewcommand\thesection{\arabic{section}}
+
+%input macros (i.e. write your own macros file called mymacros.tex 
+%and uncomment the next line)
+%\include{mymacros}
+
+\title{An Efficient Exact Solution to the Approximate Suffix-Prefix Overlap Problem using Suffix Filters}   %note \\[1ex] is a line break in the title
+
+\author{Christopher Esterhuyse}             %your name
+\college{Department of Exact Sciences}  %your college
+
+%\renewcommand{\submittedtext}{change the default text here if needed}
+\degree{Bachelor of Computer Science}     %the degree
+\degreedate{2017}         %the degree date
+
+%end the preamble and start the document
+\begin{document}
+
+\input{my_macros}
+%this baselineskip gives sufficient line spacing for an examiner to easily
+%markup the thesis with comments
+\baselineskip=18pt plus1pt
+
+%set the number of sectioning levels that get number and appear in the contents
+\setcounter{secnumdepth}{3}
+\setcounter{tocdepth}{3}
+
+
+\maketitle                  % create a title page from the preamble info
+\include{dedication}        % include a dedication.tex file
+\include{acknowlegements}   % include an acknowledgements.tex file
+\include{abstract}          % include the abstract
+
+\begin{romanpages}          % start roman page numbering
+\input{abstr}
+
+\tableofcontents
+\listoftables
+\begingroup
+\let\clearpage\relax
+\listoffigures
+\endgroup
+\clearpage
+
+% \printacronyms[include-classes=abbrev,name=Abbreviations]
+% \printacronyms[include-classes=nomencl,name=Nomenclature]
+
+
+\end{romanpages}            % end roman page numbering
+
+\clearpage
+%now include the files of latex for each of the chapters etc
+
+
+
+
+\input{introduction}
+
+
+
+\input{terminology}
+\input{related_work}
+\input{background}
+\input{impl}
+\input{experiments}
+\input{conclusion}
+\input{discussion}
+
+
+%now enable appendix numbering format and include any appendices
+% \appendix
+% \include{appendix1}
+% \include{appendix2}
+
+\input{appendix}
+
+\printglossaries
+
+%next line adds the Bibliography to the contents page
+\addcontentsline{toc}{chapter}{Bibliography}
+%uncomment next line to change bibliography name to references
+%\renewcommand{\bibname}{References}
+\bibliography{refs}        %use a bibtex bibliography file refs.bib
+\bibliographystyle{plain}  %use the plain bibliography style
+
+\end{document}

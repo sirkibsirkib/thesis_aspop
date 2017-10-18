@@ -1,0 +1,21 @@
+\chapter{Related Work}
+
+This work draws primarily from the work done by \kark{} et al,  \vali{} et al and Kucherov et al across four inter-related papers; Their contributions to the version of the algorithm used in this work can be seen as an iterative process, each elaborating and modifying the work of their predecessor. As such, the chronological order of their contributions is preserved below.
+
+\section{\kark{}}
+
+\kark{} presented the notion of the \gls{suffix filter}~\cite{kark2007}, extended from the pre-existing substring filters (also called \textit{factor filters}) used in previous works \cite{substring_myers} \cite{substring_yates}. Rather than performing one monolithic search per problem, these algorithms worked by performing a \textit{set} of smaller searches, and combining the results. \kark{} applied these suffix filters to a simpler problem than \aspop, finding \glspl{approximate match} of given string $A$ within a given \gls{text}. Their work largely laid the foundations for the use of suffix filters. \kark{} demonstrated that suffix filters were made more effective use of the \gls{text index} common to both algorithms. This allowed their algorithm to leverage the speed of the text filter, and solve the problem more quickly.
+
+\section{\vali{} I}
+
+\vali{} applied the findings of \kark{} to the \aspop{}, conceptually treating prefixes of every string in turn as string $A$ in \kark{}'s problem~\cite{vali2010}. The initial algorithm was a very direct application of the \glspl{filter} described previously. To use the same approach for the \aspop{}, the notions of \gls{candidate condition} and \gls{partitioning scheme} were explored to preserve the correctness of the algorithm while filtering the search space more thoroughly, saving time. With the transition to the \aspop{}, the largely-unchanged algorithm was identified to be subject to a performance bottleneck that arose as a consequence of the tendency towards short final \glspl{block} for \glspl{query} in the \gls{search step}, generating many \textit{spurious} candidates. \vali{} sidestepped this problem by disabling candidate generation selectively; To preserve correctness, they conducted several similar searches per \gls{filter} per pattern in a manner that they proved covered the same solutions.
+
+\section{\vali{} II}
+
+\vali{} followed up with a second paper that found a more elegant solution to the performance bottleneck identified in their previous paper~\cite{vali2012}; The new approach took a step away from the filters introduced by \kark{}, making the longest filter for each pattern more lenient such that it could cover the \glspl{solution} that would be found by the shortest filter. This allowed the shortest filter to be dropped without needing multiple queried per filter. The new filters are less intuitive at first glance, but are shown to be correct as well as demonstratively faster.
+
+\section{Kucherov}
+
+Kucherov continued the trend of altering the first \vali{} \gls{filtering scheme} to avoid performance bottlenecks~\cite{kuch2014}. The new scheme distributed the work of the dropped last filter amongst all remaining filters, with correctness relying on a lemma originally outlined by \kark{}. Additionally, Kucherov generalized their filtering scheme to incorporate a parameter $S$, which would allow the algorithm a degree of calibration that was not previously possible; This was shown to provide opportunities for speedup when correctly chosen for the problem instance. Kucherov also suggested a superior \gls{partitioning scheme} specifically designed for the \aspop{}, and demonstrated its superiority when applied alongside their own filtering scheme, or with the scheme of \vali{}.
+ 
+All of the relevant algorithms are described in further detail in the background Section \ref{background} to follow.

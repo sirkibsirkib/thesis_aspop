@@ -1,0 +1,16 @@
+\chapter{Experiments}
+
+For any execution of an \aspop{} solver, ultimately two distinct metrics of interest exist, \textit{runtime} and \textit{output quality}. While the concept of runtime is intuitive enough, quality is a subjective measure from the perspective of the solver's realistic use cases. It is in the best interest of the end user if the system performs fastest for the tasks it will actually be applied to. 
+
+As the algorithm underlying our \aspop{} solver is exact, the output \gls{solution} set is a predictable function of the parameters it is given; However, this simply moves the optimization of \textit{output quality} to the selection of the program's input parameters. As such, \textbf{phase~1} deals with understanding the mapping from these parameters to output quality.
+ 
+Once the `optimal' user-defined parameters have been established from phase~1, further iteration on the design of the solver can be done to maximize speedup for these expected cases; This effectively fixes the input parameters going forwards. \textbf{Phase~2} seeks to understand the limitations on the speed of the solver as a function of the properties inherent to the input \textit{data set}. The constraints on the parameters provided by phase~1 allow certain implementation decisions involving trade-offs to be made, intended to optimize the speed of the system \textit{specifically} for expected use cases (insofar as the fixed parameters define). Any effects of these alterations to the implementation are followed up with comparative tests.
+ 
+Entering \textbf{phase~3} of the experiments, the \aspop{} solver's implementation is considered final. Ultimately, this last phase conducts comparative experiments between our system and other existing technologies \textsc{blast}~\cite{blast} and Minimap~\cite{minimap} to quantify its comparative performance in terms of runtime and output quality.
+
+Raw experiment data is available at \url{https://github.com/sirkibsirkib/rust_overlaps_data}.
+
+\input{experiments_phase1}
+\input{experiments_phase2}
+\input{experiments_phase3}
+\input{experiments_aux}

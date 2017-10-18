@@ -1,0 +1,236 @@
+
+\newglossaryentry{suffix filter}{name=suffix filter,
+    description=
+    {A filter algorithm for ASPOP and similar problems. Defines filters as suffix block sequences of the pattern string's partition blocks and uses these filters to constrain the search branching}
+}
+
+\newglossaryentry{substring filter}{name=substring filter,
+    description=
+    {A filter algorithm for ASPOP and similar problems. Defines filters as individual pattern blocks and uses these filters to constrain the search branching}
+}
+
+\newglossaryentry{text index}{name=text index,
+	plural={text indices},
+    description=
+    {Not to be confused with an index. A data structure initialized for an input text string. After initialization, the text index can respond to queries to locate an input query string within the text. The return result of these queries usually take the form of a set of indices within the text string}
+}
+
+\newglossaryentry{text}{name=text,
+    description=
+    {The string used to initialize a text-index. Also known as text string}
+}
+
+\newglossaryentry{query}{name=query,
+	plural={queries},
+    description=
+    {A text-index can be queried for the indices of a given query string within its text. The term query might refer either to this procedure, or the string used as input}
+}
+
+\newglossaryentry{pattern}{name=pattern,
+    description=
+    {In some material, pattern is synonymous with “query string”. Here we distinguish pattern as being the original source of query strings. The query strings can be substrings, derived strings or derived substrings of the pattern string. Also known as pattern string}
+}
+
+\newglossaryentry{match location}{name=match location,
+    description=
+    {A text index returns match locations it finds within the text for the given query string}
+}
+
+\newglossaryentry{string partition}{name=string partition,
+    description=
+    {A partition of a string yields a sequence of blocks. Every symbol and index from the original string fall into exactly one block. When these blocks are concatenated, they form the original string}
+}
+
+\newglossaryentry{partitioning scheme}{name=partitioning scheme,
+    description=
+    {A partitioning scheme defines in which way a given string is partitioned. This determines the number of blocks as well as the sizes of each block}
+}
+
+\newglossaryentry{K-approximate}{name=K-approximate,
+    description=
+    {See \gls{approximate match}}
+}
+
+\newglossaryentry{block}{name=block,
+    description=
+    {A block refers to a distinct substring that is an element of the partition of a string. Each block is a substring of the partitioned string}
+}
+
+\newglossaryentry{block sequence}{name=block sequence,
+    description=
+    {A sequence of blocks, typically occurring in the same sequence as they occurred in the original string}
+}
+
+\newglossaryentry{suffix block sequence}{name=suffix block sequence,
+    description=
+    {Given a sequence of blocks X, a suffix block sequence Y represents a contiguous subsequence of X which does not contain the first element from X only if Y is empty}
+}
+
+\newglossaryentry{prefix block sequence}{name=prefix block sequence,
+    description=
+    {Given a sequence of blocks X, a prefix block sequence Y represents a contiguous subsequence of X which does not contain the last element from X only if Y is empty}
+}
+
+\newglossaryentry{exact match}{name=exact match,
+	plural={exact matches},
+    description=
+    {Two strings A and B match exactly if they are the same string by having the same symbols at the same indices. Two symbols can match if they are identical. These strings have an error distance of 0}
+}
+
+\newglossaryentry{source genome}{name=source genome,
+    description=
+    {The input of the \aspop{} is a set of reads (strings of symbols) which were originally drawn from a source genome. Genome assemblers seek to use \aspop{} solvers to identify how reads overlap such that they can reconstruct this source genome as closely as possible.}
+}
+
+\newglossaryentry{mismatch}{name=mismatch,
+	plural={mismatches},
+    description=
+    {Two symbols mismatch if they are not the same. Two strings can be considered to K-mismatch if they have an error distance of more than K}
+}
+
+\newglossaryentry{approximate match}{name=approximate match,
+	plural={approximate matches},
+    description=
+    {Two strings are said to approximately match with respect to a given whole number K, allowing the match to be exact but for up to K errors.}
+}
+
+\newglossaryentry{task}{name=task,
+    description=
+    {Conceptually isolated workloads for a problem's solution can be divided into tasks. Usually tasks correspond with process threads}
+}
+
+\newglossaryentry{error}{name=error,
+    description=
+    {An error is defined at the position of a symbol transformation operation at a specific index of a string in order to derive a new string}
+}
+
+\newglossaryentry{error rate}{name=error rate,
+    description=
+    {A numeric measure of a string. The error rate is defined as the number of errors of a string divided by its total length}
+}
+
+\newglossaryentry{error distance}{name=error distance,
+    description=
+    {The error distance K between two strings is defined as the minimal number of symbol transformations required to transform one into another (ie: derive one string from the other). The derived string would contain at least K errors}
+}
+
+\newglossaryentry{derived string}{name=derived string,
+    description=
+    {String A is derivable from string B if there exists a sequence of symbol transformations that would transform B into string A. K-derivability is analogous to being within K-distance}
+}
+
+\newglossaryentry{derivation}{name=derivation,
+    description=
+    {The process of introducing error or otherwise incrementally searching for some \gls{derived string}}
+}
+
+\newglossaryentry{substitution}{name=substitution,
+    description=
+    {The symbol transformation operation of substituting the symbol at an index position for a different symbol}
+}
+
+\newglossaryentry{insertion}{name=insertion,
+    description=
+    {The symbol transformation operation of inserting a new symbol into an index position. The resulting string is one symbol longer}
+}
+
+\newglossaryentry{deletion}{name=deletion,
+    description=
+    {The symbol transformation operation of deleting the symbol at an index position. The resulting string is one symbol shorter}
+}
+
+\newglossaryentry{indel}{name=indel,
+    description=
+    {Shorthand term for insertion or deletion operation}
+}
+
+\newglossaryentry{filter algorithm}{name=filter algorithm,
+    description=
+    {An exact algorithm that works in two steps. Step1 finds candidate solutions in the search space (which elements satisfy the candidate criterion), and step2 finds which of the candidates are solutions (which candidates satisfy the solution criterion)}
+}
+
+\newglossaryentry{read}{name=read,
+    description=
+    {A sequence read from some genomic material, represented as a string of symbols}
+}
+
+\newglossaryentry{filter criterion}{name=filter criterion,
+	plural={filter criteria},
+    description=
+    {A logical predicate over elements in the algorithm’s solution space that can be computed. The criterion is satisfied if and only if the element is a candidate}
+}
+
+\newglossaryentry{solution criterion}{name=solution criterion,
+	plural={solution criteria},
+    description=
+    {A logical predicate over elements in the algorithm’s solution space that can be computed. The criterion is satisfied if and only if the element is a solution}
+}
+
+\newglossaryentry{genome copy}{name=genome copy,
+	plural={genome copies},
+    description=
+    {A set of reads that arise from a pass over a source genome. A genomic data set can contain many copies of the same genome, and the cardinality of these copies is called `coverage'}
+}
+
+\newglossaryentry{coverage}{name=coverage,
+    description=
+    {Two major definitions of coverage exist depending on the source. In short, it is simply the number of copies of a genome in a data set. Exact definitions:\\(1) When reads of a data set are all \textit{aligned}, coverage is the average number of reads `covering' (aligned over) a nucleotide in the full genome, over all nucleotides in the genome.\\(2)The number of passes over the source genome, generating copies of it (as a set of reads) to populate the data set.}
+}
+
+\newglossaryentry{candidate}{name=candidate,
+    description=
+    {An element of an algorithm’s solution space that may or may not be a solution. An element satisfies the filter predicate if and only if it is a candidate. Also known as candidate solution}
+}
+
+\newglossaryentry{solution}{name=solution,
+    description=
+    {A solution to the problem. An element satisfies the solution predicate if and only if it is a solution}
+}
+
+\newglossaryentry{search step}{name=search step,
+    description=
+    {The first step of a filter algorithm, dealing with searching and generating the set of candidate solutions}
+}
+
+\newglossaryentry{verification step}{name=verification step,
+    description=
+    {The second step of a filter algorithm, dealing with finding the subset of candidates that are also solutions. This step usually employs another algorithm to do this task, depending on the nature of the problem}
+}
+
+\newglossaryentry{filter}{name=filter,
+    description=
+    {A sequence of whole numbers associated with a block sequence. In the suffix filter algorithms described in this work, the values given by the filter to each block define how the search procedure is allowed to branch}
+}
+
+\newglossaryentry{filtering scheme}{name=filtering scheme,
+    description=
+    {For the suffix filter algorithms used by \kark{} and \vali{}, the conceptual \gls{filter criterion} is implemented with a combination of filtering scheme and filter criterion; The filtering scheme is responsible for stunting branches of the search tree, preventing useless parts of the search space from being explored}
+}
+
+\newglossaryentry{candidate condition}{name=candidate condition,
+    description=
+    {For the suffix filter algorithms used by \kark{} and \vali{}, the conceptual filter criterion is implemented with a combination of filtering scheme and filter criterion; The candidate condition is responsible for disabling candidate generation for specific nodes of the search tree. This is often necessary as the nodes further down the tree are necessary for candidate generation, but the shallower parent nodes are known not to represent solutions}
+}
+
+\newglossaryentry{reversal}{name=reversal,
+    description=
+    {`Reversal' could refer either to the optional \aspop{} solver solution extension OR to the new kinds of solutions this mode finds: reversals. A reversal is an overlap between a string $X$ and its \textit{companion} string $X'$, with symbols in the verse order, each mapped to its \textit{partner} nucleotide. For nucleotides, this pairs `A' with `T' and `C' with `G'.}
+}
+
+\newglossaryentry{edit distance}{name=edit distance,
+    description=
+    {`Edit distance' could refer either to the optional \aspop{} solver solution extension OR to the new distance measure it refers to: edit/Levenshtein distance. This is a measure between two text strings, being defined as the minimal number of single-symbol substitution, insertion or deletion errors needed to transform one into the other. When enabled, new kinds of solutions can be found, as some pairs of strings have smaller distance measures, within acceptable limits where before they might not have been.}
+}
+
+\newglossaryentry{Hamming distance}{name=Hamming distance,
+    description=
+    {The Hamming distance between two equal-length strings $X$ and $Y$ is defined as the minimum number of single-symbol substitution operations required to transform one string into the other.}
+}
+
+\newglossaryentry{inclusion}{name=inclusion,
+    description=
+    {`Inclusions' could refer either to the optional \aspop{} solver solution extension OR to the new kinds of solutions this mode finds: inclusions. String $X$ is included in string $Y$ if $X$ is a substring of $Y$. An inclusion solution refers to an overlap solution where one read is included within the other.}
+}
+
+\makeglossaries
+

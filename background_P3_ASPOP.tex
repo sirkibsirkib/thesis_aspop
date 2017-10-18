@@ -1,0 +1,32 @@
+\section{Solving P3: Approximate Prefix Match Using Suffix Filters}
+\label{P3_suff}
+
+Problem P3 is closely related to P2. However, instead of the \gls{pattern} being fixed, given as an argument directly, matches are found for any string $A$ that is any prefix of a given \gls{pattern} at least as long as the given \bfit{t}. At first glance, extending the \gls{suffix filter} algorithm for P2 seems simple; Indeed, the problem can be solved with several instances of P2 separately, one for each \textit{valid} prefix of the pattern playing the role of P2's input `pattern' (where `valid' is shorthand for `at least as long as \bfit{t}'). Although perfectly correct, this approach does not take advantage of the similarity between the prefixes; The beginnings of the \gls{text index} search \glspl{query} would repeat many of the same steps, duplicating work. Instead, \glspl{candidate} for each prefix can be located \textit{in tandem} without altering correctness; However, some care is required to preserve the premises of lemmas \ref{lemma1} and \ref{lemma2} on which the suffix filter algorithm is built.
+
+% As described several times since section \ref{P2text_index}, throughout the search procedure of the text index, incrementally-longer prefixes of the query are \textit{matched}. Now, i
+
+ 
+Instead of separate P2 problems, P3 can be approached as being more like a single instance of P2, where partially-completed query matches during the search may also represent desirable candidates (some nodes in the search tree mark the end of valid query prefixes). To implement this idea, the search procedure must be able to generate candidates when its progress corresponds with any \gls{derived string} of a valid query prefix.
+
+During an index search, the degree to which the search node at an index position increments \bfit{pE} is a function of the sizes of the pattern's blocks; This requires the partition block sizes to be defined \textit{prior} to the search query's commencement. However, the correctness of the algorithm is reliant on every valid pattern prefix $A$ being divided into at least $K+1$ blocks, where $A$'s have various lengths and thus various values for $K$. This requires a single initialization for partition block sizes that sufficiently partitions all pattern prefixes finely enough at the same time. Although this is tricky conceptually, the partition can still be defined in terms of the pattern itself, as the \textit{error limit} for each of its prefixes is a predictable linear function of the prefix lengths (excepting for some rounding). This is the idea behind \vali{}'s \gls{partitioning scheme}; It seeks to identify a value \bfit{p}, the length of all pattern blocks (except for the last block, which can be smaller) such that no valid pattern prefix $A$ will have too few blocks and \bfit{p} is maximal. Kucherov's work describes their own partitioning scheme that satisfies this property, but distributes block lengths differently. These details are further explained in Section \ref{schemes}.
+
+
+This algorithm for P3 is where the P2 `filter-free' text index algorithm from Section \ref{P2text_index} gets left in the dust. For long patterns, the text index search algorithm would need to permit very large initial values for \bfit{pE}, resulting in very deep and wide recursive search trees, branching far more than would be necessary to match the short prefixes of the patterns, but unable to avoid doing so in order to find the solutions for longer prefixes. The filter algorithms are able to leverage the \textit{incremental} introduction of \bfit{pE} to great effect for this reason, allowing for a much more appropriately \textit{gradual} introduction of errors, resulting in slimmer search trees.
+
+
+
+
+
+\section{Solving the Approximate Suffix-Prefix Overlap Problem Using Suffix Filters}
+\label{solving_ASPOP}
+
+Where before the search space was defined by a given \gls{text} string, now the search space is defined by a given \textit{set} of strings $S$. Allowing for some bookkeeping steps before and afterwards, the \gls{text index} can be made to search these strings by being initialized with a text constructed from concatenated $S$ strings. Although it would cover all the solutions, unmodified, the above approach is too generous, as it would naively generate \glspl{candidate} anywhere within the constructed text (even overlapping two different $S$ strings). \Glspl{solution} would only exist as suffix positions for individual strings of $S$. Detecting these suffix positions is trivial if the text string is constructed with some distinct extra-alphabetic character delimiting the concatenated $S$ strings (conventionally `\$'). For example:
+\begin{align*}
+S &= \{\text{`TACC'}, \text{`GGG'}, \text{`ACCC'}\}\\
+\text{text} &= \text{`TACCGGGACCC'}
+\end{align*}
+
+During the \gls{search step}, at the moment where the search is about to generate candidates from \glspl{match location}, an additional `\$' symbol is matched, effectively narrowing down the match location set to a subset that occur as $S$ suffixes; Only for all the match locations in this subset are candidates generated. The original match location set at this position remains unchanged and potentially continues the forward search, generating more candidates deeper into the search tree.
+ 
+Aside from the alterations described in Section \ref{extensions} to support extensions, the above is the basis for the algorithms used to solve the \aspop{} onwards in the paper. As such, the \gls{suffix filter} solution to the \aspop{} as described in this section will henceforth be referred to as the `\aspop{} algorithm' for the `\aspop{} solver'.
+

@@ -1,0 +1,37 @@
+
+\begin{figure}[!h]
+\centering
+\tikzset{
+  treenode/.style = {align=center, inner sep=0pt, text centered,
+    font=\sffamily},
+  arn_n/.style = {treenode, circle, white, font=\sffamily\bfseries, draw=black,
+    fill=black, text width=2.2em},% arbre rouge noir, noeud noir
+  arn_r/.style = {treenode, circle, red, draw=red, 
+    text width=2.2em, very thick},% arbre rouge noir, noeud rouge
+  arn_x/.style = {treenode, rectangle, draw=black,
+    minimum width=0.5em, minimum height=0.5em}% arbre rouge noir, nil
+}
+
+\begin{tikzpicture}[->,>=stealth',level/.style={sibling distance = 3cm/#1,
+  level distance = 1.1cm, scale=1.2}] 
+\node [arn_n] {$\epsilon$}
+    child{ node [arn_n] {T} 
+            child{ node [arn_n] {TT} 
+            	child{ node [arn_n] {TTC} edge from parent node[above left]
+                         {exact match}} %for a named pointer
+							child{ node [arn_r] {TTT}}
+            }
+            child{ node [arn_r] {TC}
+            		child{ node [arn_r] {TCC}}	
+            }                            
+    }
+    child{ node [arn_r] {C} 
+            child{ node [arn_r] {CT} 
+              	 	child{ node [arn_r] {CTC}}
+            }
+		}
+; 
+\end{tikzpicture}
+\caption[Search tree of 1-approximate matching.]{Search tree for 1-approximate matching of `TTC' using a text index with alphabet $\{T, C\}$. Black nodes have \bfit{pE}$=1$ and red nodes have \bfit{pE}$=0$.}
+\label{fig:index_search}
+\end{figure}

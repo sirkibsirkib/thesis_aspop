@@ -1,0 +1,7 @@
+\begin{abstract}
+Finding approximate suffix-prefix overlaps between reads of genomic sequences is a crucial subproblem for some genome assemblers. Heuristic solvers such as \textsc{blast} and Minimap are well-established. Until the advent of \kark{}'s `suffix filter' algorithm, exact solvers had not been competitive due to their high computational costs. In 2014, Kucherov et al introduced a new variation of this algorithm to find the same solutions in less time.
+
+We implemented Kucherov's algorithm along with user-enabled extensions which allow the solver to find new kinds of solutions desirable for sequence assembly (such as reads included within other reads). We measured the speed of our solver experimentally using various suffix filter algorithms and under various conditions. Finally, we compared our solver's performance to that of \textsc{blast} and Minimap.
+
+Ultimately, we show that the outputs of our solver are of the highest \textit{quality} for sequence assembly, as the exact nature of our algorithm achieves high recall without sacrificing precision. Still the slowest solver of the three, we reason that our algorithm's \textit{perfect parallelilzability} would allow it to thrive in highly parallelized environments.
+\end{abstract}
